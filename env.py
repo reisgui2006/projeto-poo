@@ -7,6 +7,9 @@ from sqlalchemy import create_engine, engine_from_config, pool
 from alembic import context
 from modelos.base import Base
 from modelos.user import User
+from modelos.estado import Estado
+from modelos.cidade import Cidade
+from modelos.empresa_assistencia_tecnica import EmpresaAssistenciaTecnica
 
 load_dotenv()
 # this is the Alembic Config object, which provides

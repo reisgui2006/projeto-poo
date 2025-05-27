@@ -8,8 +8,8 @@ def main():
 
     try:
         etl.extract()
-        etl.transform()
-        etl.load()
+        # etl.transform()
+        # etl.load()
         print("ETL executado com sucesso!")
     except Exception as e:
         print(f"Erro ao executar ETL: {e}")

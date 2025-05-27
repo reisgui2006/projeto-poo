@@ -18,6 +18,7 @@ class ETL(AbstractETL):
     def extract(self):
         try:
             self._dados_extraidos = pd.read_excel(self.origem, sheet_name=None)
+            
         except Exception as e:
             print(f"Erro na extração dos dados: {e}")
             self._dados_extraidos = None

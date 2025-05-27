@@ -17,8 +17,8 @@ banco_de_dados = os.getenv("BANCO_DE_DADOS")
 
 # %%
 # testando o ETL
-origem = "nome do arquivo de origem"
-destino = f"mssql+pyodbc://{usuario}:{senha}@{host}/{banco_de_dados}?driver=ODBC+Driver+17+for+SQL+Server"
+origem = 'dados_para_importacao.xlsx' 
+destino = "mssql+pyodbc://sa:impacta1@localhost/parcial?driver=ODBC+Driver+17+for+SQL+Server"
 
 etl = ETL(origem, destino)
 
