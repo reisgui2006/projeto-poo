@@ -13,7 +13,7 @@ class EmpresaAssistenciaTecnica(Base.Base, Base):
     endereco = Column(String(100), nullable=False)
     ddd = Column(String(3), nullable=False)
     telefone = Column(String(15), nullable=False)
-    classificacao = Column(String(20), nullable=False) 
-
+    nome_classificacao = Column(String(50), ForeignKey("classificacao.nome"))
     cidade_id = Column(String(10), ForeignKey('cidade.id'), nullable=False)
+
     cidade = relationship('Cidade', backref='empresas_assistencia')

@@ -8,6 +8,7 @@ from modelos.user import User
 from modelos.estado import Estado
 from modelos.cidade import Cidade
 from modelos.empresa_assistencia_tecnica import EmpresaAssistenciaTecnica
+from modelos.classificacao import Classificacao
 
 load_dotenv()
 

@@ -1,6 +1,6 @@
 import pandas as pd
 
-
+# Tabelas simuladas
 df_user = pd.DataFrame({
     'id': [1, 2],
     'name': ['Guilherme', 'Maria'],
@@ -18,6 +18,10 @@ df_cidade = pd.DataFrame({
     'uf': ['SP', 'RJ']
 })
 
+df_classificacao = pd.DataFrame({
+    'nome': ['Nível A', 'Nível B', 'Autorizada']
+})
+
 df_empresa = pd.DataFrame({
     'id': [1, 2],
     'razao_social': ['Assistência Técnica SP Ltda', 'Assistência RJ Serviços'],
@@ -31,8 +35,10 @@ df_empresa = pd.DataFrame({
     'cidade_id': ['100', '101']
 })
 
+# Escrevendo no Excel
 with pd.ExcelWriter('dados_para_importacao.xlsx') as writer:
     df_user.to_excel(writer, sheet_name='user', index=False)
     df_estado.to_excel(writer, sheet_name='estado', index=False)
     df_cidade.to_excel(writer, sheet_name='cidade', index=False)
+    df_classificacao.to_excel(writer, sheet_name='classificacao', index=False)
     df_empresa.to_excel(writer, sheet_name='empresa_assistencia_tecnica', index=False)

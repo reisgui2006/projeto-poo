@@ -9,16 +9,16 @@ from modelos.user import User
 from modelos.estado import Estado
 from modelos.cidade import Cidade
 from modelos.empresa_assistencia_tecnica import EmpresaAssistenciaTecnica
+from modelos.classificacao import Classificacao
 
 
 class ETL(AbstractETL):
-    def __init__(self, origem, destino):
-        super().__init__(origem, destino)
+    def _init_(self, origem, destino):
+        super()._init_(origem, destino)
 
     def extract(self):
         try:
             self._dados_extraidos = pd.read_excel(self.origem, sheet_name=None)
-            
         except Exception as e:
             print(f"Erro na extração dos dados: {e}")
             self._dados_extraidos = None
@@ -57,8 +57,19 @@ class ETL(AbstractETL):
                 cidades = Cidade.from_dataframe(cidades_df)
                 session.add_all(cidades)
 
+            # Carregar classificacao antes para evitar erro de FK
+            if 'classificacao' in self._dados_transformados:
+                classificacoes_df = self._dados_transformados['classificacao']
+                classificacoes = Classificacao.from_dataframe(classificacoes_df)
+                session.add_all(classificacoes)
+
             if 'empresa_assistencia_tecnica' in self._dados_transformados:
                 empresas_df = self._dados_transformados['empresa_assistencia_tecnica']
+
+                # Se no dataframe a coluna for 'classificacao', renomeia para 'nome_classificacao'
+                if 'classificacao' in empresas_df.columns:
+                    empresas_df = empresas_df.rename(columns={'classificacao': 'nome_classificacao'})
+
                 empresas = EmpresaAssistenciaTecnica.from_dataframe(empresas_df)
                 session.add_all(empresas)
 
